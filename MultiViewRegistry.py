@@ -1,6 +1,6 @@
 # Copyright (c) 2002 Infrae. All rights reserved.
 # See also LICENSE.txt
-# $Revision: 1.2 $
+# $Revision: 1.3 $
 # Zope
 from interfaces import IViewRegistry
 import Acquisition
@@ -144,7 +144,7 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
     
     def render_view(self, view_type, obj):
         """Render view of object using view_registry. This calls
-        the render_preview() method defined on the view in the registry.
+        the render_view() method defined on the view in the registry.
         """
         self.REQUEST['model'] = obj
         return self.get_view(view_type,
