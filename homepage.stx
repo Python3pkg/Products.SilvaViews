@@ -1,0 +1,4 @@
+SilvaViews is a component that is used by Silva to attach views to objects. It
+could also be used outside of Silva in other projects.
+
+"More about Silva":http://www.zope.org/Members/infrae/Silva
