@@ -3,13 +3,14 @@ See also LICENSE.txt
 
 Meta::
 
-  Valid for:  SilvViews 0.9.
+  Valid for:  SilvViews 0.10.
   Author:     Martijn Faassen
   Email:      faassen@infrae.com
-  CVS:        $Revision: 1.2 $
+  CVS:        $Revision: 1.3 $
 
 SilvaViews is developed by Infrae (http://www.infrae.com).
 
-Infrae Silva Views developer
+Infrae Silva Views developers
 
   Martijn Faassen <faassen@infrae.com>
+  Jan-Wijbrand Kolman <jw@infrae.com>

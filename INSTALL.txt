@@ -3,10 +3,10 @@ See also LICENSE.txt
 
 Meta::
   
-  Valid for:  SilvaViews 0.9
+  Valid for:  SilvaViews 0.10
   Author:     Martijn Faassen
   Email:      faassen@infrae.com
-  CVS:        $Revision: 1.2 $
+  CVS:        $Revision: 1.3 $
 
 Installing SilvaViews
 

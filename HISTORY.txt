@@ -1,7 +1,13 @@
 Copyright (c) 2002-2005 Infrae. All rights reserved.
 See also LICENSE.txt
  
-SilvaExternalSources changes
+SilvaViews changes
+
+  0.10
+
+    Changed way SilvaViews find the right view pages. There is now less
+    chance an object in content space will have an id clash with a 
+    view.
  
   0.9
   
