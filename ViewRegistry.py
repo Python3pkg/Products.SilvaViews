@@ -1,6 +1,6 @@
 # Copyright (c) 2002 Infrae. All rights reserved.
 # See also LICENSE.txt
-# $Revision: 1.3 $
+# $Revision: 1.4 $
 # Zope
 from interfaces import IViewRegistry
 import Acquisition
@@ -156,25 +156,25 @@ class ViewAttribute(Acquisition.Implicit):
         return self[self._default_method]()
 
     def __bobo_traverse__(self, request, name):
+        """Get correct method on view for traversals
+        """
+        if name == 'index_html':
+            return self[self._default_method]
         return self[name]
     
     def __getitem__(self, name):
-        """Get correct method on view
+        """Get correct method on view for getitem access
         """
-        self.REQUEST['model'] = model = self.aq_parent
+        request = self.REQUEST
+        request['model'] = model = self.aq_parent
         method_on_view =  self.service_view_registry.get_method_on_view(
             self._view_type, model, name)
             
         if not method_on_view:
             # "Method on view" does not exist: redirect to default method.
-            # XXX may cause endless redirection loop,
-            # if default does not exist.
-            self.REQUEST.RESPONSE.redirect(
-                '%s/%s/%s' % (model.absolute_url(), self._view_type,
-                              self._default_method))
-            # A return is needed, although the client actually *will*
-            # redirect (If the client does not redirect, it should still
-            # show the default method on view).
-            return self.aq_parent.index_html
+            # XXX may cause endless redirection loop, if default does not exist.
+            response = request.RESPONSE
+            response.redirect('%s/%s/%s' % (
+                model.absolute_url(), self._view_type, self._default_method))
 
         return method_on_view
