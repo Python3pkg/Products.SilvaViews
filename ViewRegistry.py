@@ -1,7 +1,8 @@
 # Copyright (c) 2002 Infrae. All rights reserved.
 # See also LICENSE.txt
-# $Revision: 1.1 $
+# $Revision: 1.2 $
 # Zope
+from interfaces import IViewRegistry
 import Acquisition
 from Acquisition import ImplicitAcquisitionWrapper, aq_base, aq_inner
 from OFS import Folder, SimpleItem, ObjectManager, PropertyManager, \
@@ -20,6 +21,8 @@ class ViewRegistry(Folder.Folder):
     """
     meta_type = "Silva View Registry"
 
+    __implements__ = IViewRegistry
+    
     security = ClassSecurityInfo()
 
     manage_options = (

@@ -1,7 +1,8 @@
 # Copyright (c) 2002 Infrae. All rights reserved.
 # See also LICENSE.txt
-# $Revision: 1.1 $
+# $Revision: 1.2 $
 # Zope
+from interfaces import IViewRegistry
 import Acquisition
 from OFS import SimpleItem, PropertyManager
 from AccessControl import ClassSecurityInfo, Permissions
@@ -18,6 +19,8 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
     """
     meta_type = "Silva Multi View Registry"
 
+    __implements__ = IViewRegistry
+    
     security = ClassSecurityInfo()
 
     manage_options = (
