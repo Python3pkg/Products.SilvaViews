@@ -1,7 +1,7 @@
 <!--
 Copyright (c) 2002 Infrae. All rights reserved.
 See also LICENSE.txt
-Version of this file: $Revision: 1.1 $
+Version of this file: $Revision: 1.2 $
 -->
 <h1 tal:replace="structure here/manage_page_header">Header</h1>
 
@@ -21,7 +21,8 @@ Version of this file: $Revision: 1.1 $
   <td tal:define="view python:here.get_view(view_type, meta_type)">
     <a href="" tal:condition="view"
        tal:content="python:view.getId()"
-    tal:attributes="href python:'%s/manage_main' % view.absolute_url()">view_id</a><p tal:condition="not:view">No view registered!</p></td>
+    tal:attributes="href python:'%s/manage_main' % view.absolute_url()">view_id</a>
+  <p tal:condition="not:view">No view found at <tal:content content="structure python:'/'.join(here.get_view_path(view_type, meta_type))" /></p></td>
   </tr>
 </table>
 <br />
