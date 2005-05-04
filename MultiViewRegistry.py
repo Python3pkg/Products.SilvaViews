@@ -1,6 +1,6 @@
 # Copyright (c) 2002-2005 Infrae. All rights reserved.
 # See also LICENSE.txt
-# $Revision: 1.4 $
+# $Revision: 1.5 $
 # Zope
 from interfaces import IViewRegistry
 import Acquisition
@@ -152,8 +152,19 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
 
     def get_method_on_view(self, view_type, obj, name):
         """Get a method on the view for the object.
+        
+        Make sure it is not something we can find through acquisition
+        outside of the service_views hierarchy (i.e. in the Silva Root or
+        the Silva Root's parents).
         """
-        return getattr(self.get_view(view_type, obj.meta_type), name, None)
+        view = self.get_view(view_type, obj.meta_type)
+        method_on_view = getattr(view, name, None)
+        if method_on_view is None:
+            return None
+        physicalpath = method_on_view.getPhysicalPath()
+        if 'service_views' not in physicalpath:
+            return None
+        return method_on_view
     
 Globals.InitializeClass(MultiViewRegistry)
 
