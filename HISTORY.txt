@@ -3,6 +3,11 @@ See also LICENSE.txt
  
 SilvaViews changes
 
+  0.11
+
+    The improvement in 0.10 created problems inside Silva
+    itself. Reverted this to older situation.
+
   0.10
 
     Changed way SilvaViews find the right view pages. There is now less

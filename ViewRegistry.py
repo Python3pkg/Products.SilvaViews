@@ -1,6 +1,6 @@
 # Copyright (c) 2002-2005 Infrae. All rights reserved.
 # See also LICENSE.txt
-# $Revision: 1.5 $
+# $Revision: 1.6 $
 # Zope
 from interfaces import IViewRegistry
 import Acquisition
@@ -155,13 +155,6 @@ class ViewAttribute(Acquisition.Implicit):
         """
         return self[self._default_method]()
 
-    def __bobo_traverse__(self, request, name):
-        """Get correct method on view for traversals
-        """
-        if name == 'index_html':
-            return self[self._default_method]
-        return self[name]
-    
     def __getitem__(self, name):
         """Get correct method on view for getitem access
         """
