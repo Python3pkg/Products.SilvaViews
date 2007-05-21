@@ -1,1 +1,1 @@
-SilvaViews 0.12 (CVS/UNRELEASED)
+SilvaViews 0.12
