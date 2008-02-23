@@ -1,7 +1,13 @@
-Copyright (c) 2002-2005 Infrae. All rights reserved.
+Copyright (c) 2002-2007 Infrae. All rights reserved.
 See also LICENSE.txt
  
 SilvaViews changes
+
+  0.12
+
+    Modified class registration for new Silva 2.1
+    product registration, using a zmi-add-list filter.  SilvaViews
+    will still function if Silva is not present
 
   0.11
 
