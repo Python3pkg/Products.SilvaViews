@@ -3,7 +3,7 @@ See also LICENSE.txt
  
 SilvaViews changes
 
-  0.12
+  0.13
 
     Modified class registration for new Silva 2.1
     product registration, using a zmi-add-list filter.  SilvaViews
