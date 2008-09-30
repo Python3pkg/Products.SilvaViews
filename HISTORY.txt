@@ -1,25 +1,33 @@
-Copyright (c) 2002-2008 Infrae. All rights reserved.
-See also LICENSE.txt
  
-SilvaViews changes
+Changes
+=======
 
-  0.13
+0.14 (2008/30/09)
+-----------------
 
-    Modified class registration for new Silva 2.1
-    product registration, using a zmi-add-list filter.  SilvaViews
-    will still function if Silva is not present
+* Reformat documentation to release as an egg.
 
-  0.11
+0.13
+----
 
-    The improvement in 0.10 created problems inside Silva
-    itself. Reverted this to older situation.
+* Modified class registration for new Silva 2.1
+  product registration, using a zmi-add-list filter.  SilvaViews
+  will still function if Silva is not present
 
-  0.10
+0.11
+----
 
-    Changed way SilvaViews find the right view pages. There is now less
-    chance an object in content space will have an id clash with a 
-    view.
- 
-  0.9
-  
-    Initial public release.
+* The improvement in 0.10 created problems inside Silva
+  itself. Reverted this to older situation.
+
+0.10
+----
+
+* Changed way SilvaViews find the right view pages. There is now less
+  chance an object in content space will have an id clash with a 
+  view.
+
+0.9
+---
+
+* Initial public release.
