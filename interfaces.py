@@ -1,4 +1,5 @@
-from Interface import Interface
+
+from zope.interface import Interface
 
 class IViewRegistry(Interface):
     """View registries allow associating views with meta_types.
@@ -7,7 +8,7 @@ class IViewRegistry(Interface):
     def get_view_types():
         """Get all view types known to this registry.
         """
-    
+
     def get_meta_types(view_type):
         """Get all meta_types registered for a view type.
         """
@@ -15,7 +16,7 @@ class IViewRegistry(Interface):
     def has_view(view_type, meta_type):
         """Return true if the registry has a view of this type for meta_type.
         """
-        
+
     def get_view(view_type, meta_type):
         """Get a view for meta_type and view_type.
         """
@@ -31,8 +32,8 @@ class IViewRegistry(Interface):
 
         This calls the view method defined on the view found
         """
-        
+
     def get_method_on_view(view_type, obj, name):
         """Return method defined on the view for the object.
         """
-        
+

@@ -1,8 +1,10 @@
 # Copyright (c) 2002-2008 Infrae. All rights reserved.
 # See also LICENSE.txt
-# $Revision: 1.6 $
-# Zope
+# $Id$
+
+from zope.interface import implements
 from interfaces import IViewRegistry
+
 import Acquisition
 from Acquisition import ImplicitAcquisitionWrapper, aq_base, aq_inner
 from OFS import Folder, SimpleItem, ObjectManager, PropertyManager, \
@@ -21,8 +23,8 @@ class ViewRegistry(Folder.Folder):
     """
     meta_type = "Silva View Registry"
 
-    __implements__ = IViewRegistry
-    
+    implements(IViewRegistry)
+
     security = ClassSecurityInfo()
 
     manage_options = (
@@ -31,13 +33,13 @@ class ViewRegistry(Folder.Folder):
         PropertyManager.PropertyManager.manage_options +\
       ( {'label':'Security', 'action':'manage_access'},
         {'label':'Undo', 'action':'manage_UndoForm'} ) +\
-        FindSupport.FindSupport.manage_options 
+        FindSupport.FindSupport.manage_options
       )
 
     manage_associationsForm = PageTemplateFile(
         'www/viewRegistryAssociations',
         globals(),  __name__='manage_assocationsForm')
-    
+
     # needed, as this uses here/manage_page_header
     # which need the "manager" role
     security.declareProtected(ViewManagementScreens,
@@ -48,7 +50,7 @@ class ViewRegistry(Folder.Folder):
         self.view_types = {}
 
     # MANIPULATORS
-    
+
     security.declareProtected(ViewManagementScreens, 'register')
     def register(self, view_type, meta_type, view_path):
         """Register a view path with the registry. Can also be used
@@ -69,9 +71,9 @@ class ViewRegistry(Folder.Folder):
         """Clear all view_types associations.
         """
         self.view_types = {}
-    
+
     # ACCESSORS
-    
+
     def get_view_types(self):
         """Get all view types, sorted.
         """
@@ -95,7 +97,7 @@ class ViewRegistry(Folder.Folder):
             return 1
         except KeyError:
             return 0
-        
+
     def get_view_path(self, view_type, meta_type):
         """Get view path used for view_type/meta_type combination.
         """
@@ -116,7 +118,7 @@ class ViewRegistry(Folder.Folder):
         self.REQUEST['model'] = obj
         return self.get_view(view_type,
                               obj.meta_type).render_preview()
-    
+
     def render_view(self, view_type, obj):
         """Render view of object using view_registry. This calls
         the render_preview() method defined on the view in the registry.
@@ -129,7 +131,7 @@ class ViewRegistry(Folder.Folder):
         """Get a method on the view for the object.
         """
         return getattr(self.get_view(view_type, obj.meta_type), name, None)
-    
+
 Globals.InitializeClass(ViewRegistry)
 
 manage_addViewRegistryForm = PageTemplateFile(
@@ -162,7 +164,7 @@ class ViewAttribute(Acquisition.Implicit):
         request['model'] = model = self.aq_parent
         method_on_view =  self.service_view_registry.get_method_on_view(
             self._view_type, model, name)
-            
+
         if not method_on_view:
             # "Method on view" does not exist: redirect to default method.
             # XXX may cause endless redirection loop, if default does not exist.
