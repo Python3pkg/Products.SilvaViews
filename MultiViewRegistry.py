@@ -1,16 +1,18 @@
 # Copyright (c) 2002-2008 Infrae. All rights reserved.
 # See also LICENSE.txt
-# $Revision: 1.6 $
-# Zope
-from interfaces import IViewRegistry
-import Acquisition
-from OFS import SimpleItem, PropertyManager
-from AccessControl import ClassSecurityInfo, Permissions
-from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-import Globals
+# $Id$
 
-# misc
-from helpers import add_and_edit
+# Zope
+from AccessControl import ClassSecurityInfo, Permissions
+from App.class_init import InitializeClass
+from OFS import SimpleItem, PropertyManager
+from Products.PageTemplates.PageTemplateFile import PageTemplateFile
+import Acquisition
+
+# SilvaViews
+from Products.SilvaViews.interfaces import IViewRegistry
+from Products.SilvaViews.helpers import add_and_edit
+
 
 ViewManagementScreens = Permissions.view_management_screens
 
@@ -20,7 +22,7 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
     meta_type = "Silva Multi View Registry"
 
     __implements__ = IViewRegistry
-    
+
     security = ClassSecurityInfo()
 
     manage_options = (
@@ -33,14 +35,14 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
     manage_main = PageTemplateFile(
         'www/viewRegistryAssociations',
         globals(),  __name__='manage_main')
-      
+
     def __init__(self, id):
         self.id = id
         self.view_types = {}
         self.trees = []
-        
+
     # MANIPULATORS
-    
+
     security.declareProtected(ViewManagementScreens, 'register')
     def register(self, view_type, meta_type, view_path):
         """Register a view path with the registry. Can also be used
@@ -65,16 +67,16 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
         """Set which trees to search and in which order.
         """
         self.trees = trees
-        
+
     security.declareProtected(ViewManagementScreens, 'clear')
     def clear(self):
         """Clear all view_types associations.
         """
         self.view_types = {}
         self.trees = []
-        
+
     # ACCESSORS
-    
+
     def get_view_types(self):
         """Get all view types, sorted.
         """
@@ -98,7 +100,7 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
             return 1
         except KeyError:
             return 0
-        
+
     def get_view_path(self, view_type, meta_type):
         """Get view path used for view_type/meta_type combination.
         """
@@ -133,7 +135,7 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
                 return object
         # we didn't find the view in the end, so return None
         return None
-        
+
     def render_preview(self, view_type, obj):
         """Render preview of object using view_registry. This calls
         the render_preview() method defined on the view in the registry.
@@ -141,7 +143,7 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
         self.REQUEST['model'] = obj
         return self.get_view(view_type,
                               obj.meta_type).render_preview()
-    
+
     def render_view(self, view_type, obj):
         """Render view of object using view_registry. This calls
         the render_view() method defined on the view in the registry.
@@ -154,12 +156,14 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
         """Get a method on the view for the object.
         """
         return getattr(self.get_view(view_type, obj.meta_type), name, None)
-    
-Globals.InitializeClass(MultiViewRegistry)
+
+InitializeClass(MultiViewRegistry)
+
 
 manage_addMultiViewRegistryForm = PageTemplateFile(
     "www/multiViewRegistryAdd", globals(),
     __name__='manage_addMultiViewRegistryForm')
+
 
 def manage_addMultiViewRegistry(self, id, REQUEST=None):
     """Add a MultiViewRegistry."""

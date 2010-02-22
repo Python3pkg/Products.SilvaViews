@@ -3,20 +3,22 @@
 # $Id$
 
 from zope.interface import implements
-from interfaces import IViewRegistry
 
 import Acquisition
 from Acquisition import ImplicitAcquisitionWrapper, aq_base, aq_inner
+from AccessControl import ClassSecurityInfo, Permissions
+from App.class_init import InitializeClass
+from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from OFS import Folder, SimpleItem, ObjectManager, PropertyManager, \
      FindSupport
-from AccessControl import ClassSecurityInfo, Permissions
-from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-import Globals
 
 # misc
-from helpers import add_and_edit
+from Products.SilvaViews.helpers import add_and_edit
+from Products.SilvaViews.interfaces import IViewRegistry
+
 
 ViewManagementScreens = Permissions.view_management_screens
+
 
 class ViewRegistry(Folder.Folder):
     """Silva View Registry.
@@ -132,7 +134,8 @@ class ViewRegistry(Folder.Folder):
         """
         return getattr(self.get_view(view_type, obj.meta_type), name, None)
 
-Globals.InitializeClass(ViewRegistry)
+InitializeClass(ViewRegistry)
+
 
 manage_addViewRegistryForm = PageTemplateFile(
     "www/viewRegistryAdd", globals(),
@@ -145,6 +148,7 @@ def manage_addViewRegistry(self, id, REQUEST=None):
 
     add_and_edit(self, id, REQUEST)
     return ''
+
 
 class ViewAttribute(Acquisition.Implicit):
 
