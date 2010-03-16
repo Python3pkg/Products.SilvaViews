@@ -6,10 +6,10 @@ import ViewRegistry, MultiViewRegistry
 
 hasMakeContainerFilter = True
 try:
-    from Products.Silva.helpers import makeContainerFilter
+    from silva.core.conf.utils import makeZMIFilter
 except:
     hasMakeContainerFilter = False
-
+    
 def initialize(context):
     if hasMakeContainerFilter:
         context.registerClass(
@@ -17,7 +17,7 @@ def initialize(context):
             constructors = (ViewRegistry.manage_addViewRegistryForm,
                             ViewRegistry.manage_addViewRegistry),
             icon = "www/silva_view_registry.gif",
-            container_filter = makeContainerFilter()
+            container_filter = makeZMIFilter(ViewRegistry.ViewRegistry)
             )
 
         context.registerClass(
@@ -25,7 +25,7 @@ def initialize(context):
             constructors = (MultiViewRegistry.manage_addMultiViewRegistryForm,
                             MultiViewRegistry.manage_addMultiViewRegistry),
             icon = "www/silva_multi_view_registry.gif",
-            container_filter = makeContainerFilter()
+            container_filter = makeZMIFilter(MultiViewRegistry.MultiViewRegistry)
             )
     else:
         context.registerClass(

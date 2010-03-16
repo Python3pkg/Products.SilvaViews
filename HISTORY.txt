@@ -5,7 +5,8 @@ Changes
 0.15 (ureleased)
 ----------------
 
-* ...
+* compatibility for silva.core.conf.utils.makeZMIFilter (formerly 
+  Products.Silva.utils.makeContainerFilter
 
 0.14 (2008/30/09)
 -----------------

@@ -3,6 +3,8 @@
 # $Id$
 
 # Zope
+from zope.interface import implements
+
 from AccessControl import ClassSecurityInfo, Permissions
 from App.class_init import InitializeClass
 from OFS import SimpleItem, PropertyManager
@@ -21,7 +23,7 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
     """
     meta_type = "Silva Multi View Registry"
 
-    __implements__ = IViewRegistry
+    implements(IViewRegistry)
 
     security = ClassSecurityInfo()
 
