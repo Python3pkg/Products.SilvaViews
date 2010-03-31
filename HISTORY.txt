@@ -2,13 +2,13 @@
 Changes
 =======
 
-0.15 (ureleased)
-----------------
+0.15 (2010-03-31)
+-----------------
 
-* compatibility for silva.core.conf.utils.makeZMIFilter (formerly 
-  Products.Silva.utils.makeContainerFilter
+* Compatibility for ``silva.core.conf.utils.makeZMIFilter`` (formerly 
+  ``Products.Silva.utils.makeContainerFilter``).
 
-0.14 (2008/30/09)
+0.14 (2008-09-30)
 -----------------
 
 * Reformat documentation to release as an egg.
