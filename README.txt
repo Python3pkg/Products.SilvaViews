@@ -1,5 +1,7 @@
 SilvaViews
 ==========
 
-SilvaViews is a component that is used by Silva to attach views to objects.
-It could also be used outside of Silva in other projects.
+``SilvaViews`` is a component that is used by Silva to attach old
+style views (implemented by DirectoryViews templates and python
+scripts) to objects.
+
