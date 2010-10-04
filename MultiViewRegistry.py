@@ -7,14 +7,13 @@ from zope.interface import implements
 
 from AccessControl import ClassSecurityInfo, Permissions
 from App.class_init import InitializeClass
-from OFS import SimpleItem, PropertyManager
+from OFS import SimpleItem
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-import Acquisition
 
 # SilvaViews
 from Products.SilvaViews.interfaces import IViewRegistry
 from Products.SilvaViews.helpers import add_and_edit
-
+from silva.core.conf.utils import getFiveViewNameFor
 
 ViewManagementScreens = Permissions.view_management_screens
 
@@ -94,27 +93,34 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
         result.sort()
         return result
 
-    def has_view(self, view_type, meta_type):
+    def has_view(self, view_type, meta_type, content=None):
         """Return true if system has a view of this type.
         """
-        try:
-            self.view_types[view_type][meta_type]
-            return 1
-        except KeyError:
-            return 0
+        steps = self.get_view_path(view_type, meta_type, content)
+        return steps is not None
 
-    def get_view_path(self, view_type, meta_type):
+    def get_view_path(self, view_type, meta_type, content=None):
         """Get view path used for view_type/meta_type combination.
         """
-        return self.view_types[view_type][meta_type]
+        settings = self.view_types.get(view_type)
+        if settings is None:
+            return None
+        steps = settings.get(meta_type)
+        if steps is None:
+            if content is not None:
+                alternate_meta_type = getFiveViewNameFor(content)
+                steps = settings.get(alternate_meta_type)
+        return steps
 
-    def get_view(self, view_type, meta_type):
+    def get_view(self, view_type, meta_type, content=None):
         """Get view for meta_type.
         """
         # root of all the view trees
         view_root = self.service_views
         # steps we need to take
-        steps = self.view_types[view_type][meta_type]
+        steps = self.get_view_path(view_type, meta_type, content)
+        if steps is None:
+            return None
         # start at the view root
         object = view_root
         # now search through the trees
@@ -157,7 +163,7 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
     def get_method_on_view(self, view_type, obj, name):
         """Get a method on the view for the object.
         """
-        return getattr(self.get_view(view_type, obj.meta_type), name, None)
+        return getattr(self.get_view(view_type, obj.meta_type, obj), name, None)
 
 InitializeClass(MultiViewRegistry)
 
