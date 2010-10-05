@@ -2,10 +2,11 @@
 Changes
 =======
 
-0.16 (unreleased)
+0.16 (2010-10-05)
 -----------------
 
-* ...
+* When looking for paths for a view for a content type, try to fallback
+  to the default *Five compatible* path if the content type as nothing registred.
 
 0.15 (2010-03-31)
 -----------------

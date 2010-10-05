@@ -1,1 +1,1 @@
-SilvaViews 0.16dev
+SilvaViews 0.16
