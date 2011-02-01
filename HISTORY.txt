@@ -1,11 +1,12 @@
- 
+
 Changes
 =======
 
 0.17 (unreleased)
 -----------------
 
-* ...
+* If a directory is registered in the views system but no longer
+  exist, just ignore it, don't error.
 
 0.16 (2010-10-05)
 -----------------
@@ -16,7 +17,7 @@ Changes
 0.15 (2010-03-31)
 -----------------
 
-* Compatibility for ``silva.core.conf.utils.makeZMIFilter`` (formerly 
+* Compatibility for ``silva.core.conf.utils.makeZMIFilter`` (formerly
   ``Products.Silva.utils.makeContainerFilter``).
 
 0.14 (2008-09-30)
@@ -41,7 +42,7 @@ Changes
 ----
 
 * Changed way SilvaViews find the right view pages. There is now less
-  chance an object in content space will have an id clash with a 
+  chance an object in content space will have an id clash with a
   view.
 
 0.9

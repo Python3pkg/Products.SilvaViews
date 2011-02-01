@@ -6,6 +6,7 @@
 from zope.interface import implements
 
 from AccessControl import ClassSecurityInfo, Permissions
+from Acquisition import aq_base
 from App.class_init import InitializeClass
 from OFS import SimpleItem
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -129,12 +130,14 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
             # get the tree in the acquisition context of whatever object
             # we are in (either the views_root or in fact somewhere in
             # previous view tree)
+            if not hasattr(object, tree):
+                continue
             object = getattr(object, tree)
             # now try to get the view from this tree
             for step in steps:
                 # we break so we move on to the next tree and start stepping
                 # again
-                if not hasattr(object.aq_base, step):
+                if not hasattr(aq_base(object), step):
                     break
                 # we find it so we take the next step
                 object = getattr(object, step)
