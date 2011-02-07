@@ -2,8 +2,8 @@
 Changes
 =======
 
-0.17 (unreleased)
------------------
+0.16.1 (2010-02-07)
+-------------------
 
 * If a directory is registered in the views system but no longer
   exist, just ignore it, don't error.
