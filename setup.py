@@ -6,7 +6,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.16.2'
+version = '0.17dev'
 
 setup(name='Products.SilvaViews',
       version=version,
