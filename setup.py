@@ -10,7 +10,7 @@ version = '0.17dev'
 
 setup(name='Products.SilvaViews',
       version=version,
-      description="Views machinery for Silva.",
+      description="Zope 2 views machinery for Silva 2",
       long_description=open(os.path.join("Products", "SilvaViews", "README.txt")).read() + "\n" +
                        open(os.path.join("Products", "SilvaViews", "HISTORY.txt")).read(),
       classifiers=[
