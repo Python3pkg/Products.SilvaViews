@@ -1,7 +1,7 @@
 # Copyright (c) 2002-2010 Infrae. All rights reserved.
 # See also LICENSE.txt
 # $Revision$
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 def add_and_edit(self, id, REQUEST):
     """Helper function to point to the object's management screen if
@@ -14,6 +14,6 @@ def add_and_edit(self, id, REQUEST):
         u = self.DestinationURL()
     except:
         u = REQUEST['URL1']
-    if REQUEST.has_key('submit_edit'):
-        u = "%s/%s" % (u, urllib.quote(id))
+    if 'submit_edit' in REQUEST:
+        u = "%s/%s" % (u, urllib.parse.quote(id))
     REQUEST.RESPONSE.redirect(u+'/manage_main')

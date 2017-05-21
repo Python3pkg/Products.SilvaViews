@@ -2,7 +2,7 @@
 # See also LICENSE.txt
 # $Revision$
 
-import ViewRegistry, MultiViewRegistry
+from . import ViewRegistry, MultiViewRegistry
 
 hasMakeContainerFilter = True
 try:

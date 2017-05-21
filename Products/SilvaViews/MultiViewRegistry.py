@@ -82,7 +82,7 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
     def get_view_types(self):
         """Get all view types, sorted.
         """
-        result = self.view_types.keys()
+        result = list(self.view_types.keys())
         result.sort()
         return result
 
@@ -90,7 +90,7 @@ class MultiViewRegistry(SimpleItem.SimpleItem):
         """Get meta_types registered for view_type, sorted.
         """
         meta_types = self.view_types.get(view_type, {})
-        result = meta_types.keys()
+        result = list(meta_types.keys())
         result.sort()
         return result
 
